@@ -1,4 +1,5 @@
 - eslint & prettier setup
+
   ```
   yarn add -D eslint
   yarn eslint --init
@@ -6,3 +7,5 @@
   yarn add -D prettier eslint-plugin-prettier eslint-config-prettier
   yarn add -D eslint-plugin-simple-import-sort
   ```
+
+- chakra-ui と react-final-form でサクッと form を作りたい
