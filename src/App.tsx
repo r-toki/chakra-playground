@@ -1,3 +1,5 @@
+import { Container } from "@chakra-ui/react";
+
 export const App = () => {
-  return <div>This is App</div>;
+  return <Container py="4">This is App</Container>;
 };
