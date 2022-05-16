@@ -21,8 +21,7 @@ const theme = extendTheme({
 });
 
 const rootElement = document.getElementById("root");
-if (!rootElement) throw new Error("rootElement is not defined");
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.createRoot(rootElement!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
