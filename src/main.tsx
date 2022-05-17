@@ -12,11 +12,6 @@ const theme = extendTheme({
         fontSize: "sm",
       },
     },
-    FormErrorMessage: {
-      baseStyle: {
-        fontSize: "sm",
-      },
-    },
   },
 });
 
