@@ -1,73 +1,7 @@
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  FormControlProps,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  InputProps,
-  Stack,
-  Textarea,
-} from "@chakra-ui/react";
-import { Props as SelectProps, Select } from "chakra-react-select";
-import { FC } from "react";
-import { Form, useField } from "react-final-form";
-import ReactTextareaAutosize, { TextareaAutosizeProps } from "react-textarea-autosize";
+import { Box, Button, Container, Stack } from "@chakra-ui/react";
+import { Form } from "react-final-form";
 
-type AppFormControlProps = { name: string } & FormControlProps;
-
-const AppFormControl: FC<AppFormControlProps> = ({ name, ...rest }) => {
-  const { meta } = useField(name, { subscription: { touched: true, error: true } });
-  return <FormControl {...rest} isInvalid={meta.touched && meta.error} />;
-};
-
-type AppFormErrorProps = { name: string };
-
-const AppFormError: FC<AppFormErrorProps> = ({ name }) => {
-  const { meta } = useField(name, { subscription: { error: true } });
-  return <FormErrorMessage>{meta.error}</FormErrorMessage>;
-};
-
-type AppInputControlProps = { name: string; label: string } & InputProps;
-
-const AppTextInputControl: FC<AppInputControlProps> = ({ name, label, ...rest }) => {
-  const { input, meta } = useField(name);
-  return (
-    <AppFormControl name={name} isRequired={rest.isRequired}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Input {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
-      <AppFormError name={name} />
-    </AppFormControl>
-  );
-};
-
-type AppTextAreaControlProps = { name: string; label: string } & TextareaAutosizeProps;
-
-const AppTextAreaControl: FC<AppTextAreaControlProps> = ({ name, label, ...rest }) => {
-  const { input, meta } = useField(name);
-  return (
-    <AppFormControl name={name} isRequired={rest.required}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Textarea as={ReactTextareaAutosize} {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
-      <AppFormError name={name} />
-    </AppFormControl>
-  );
-};
-
-type AppSelectControlProps = { name: string; label: string } & SelectProps;
-
-const AppSelectControl: FC<AppSelectControlProps> = ({ name, label, ...rest }) => {
-  const { input, meta } = useField(name);
-  return (
-    <AppFormControl name={name} isRequired={rest.isRequired}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Select {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
-      <AppFormError name={name} />
-    </AppFormControl>
-  );
-};
+import { AppCheckboxArrayControl, AppRadioGroupControl, AppTextInputControl } from "./components/app-form-components";
 
 const onSubmit = (v: any) => {
   console.log(v);
@@ -76,19 +10,35 @@ const onSubmit = (v: any) => {
 const AppForm = () => {
   return (
     <Form
+      initialValues={{}}
       onSubmit={onSubmit}
       render={({ handleSubmit }) => (
         <Box as="form" onSubmit={handleSubmit}>
-          <Stack>
-            <AppTextInputControl name="firstName" label="名前" autoComplete="off" />
-            <AppTextAreaControl name="otherComments" label="その他" />
-            <AppSelectControl
-              name="country"
-              label="出身国"
-              placeholder="国を選択してください"
-              isClearable
-              options={[{ label: "韓国", value: "korea" }]}
-            />
+          <Stack spacing="8">
+            <Stack spacing="4">
+              <AppTextInputControl name="firstName" label="First name" isRequired />
+              <AppCheckboxArrayControl
+                name="toppings"
+                label="Toppings"
+                options={[
+                  { value: "chicken", label: "Chicken" },
+                  { value: "ham", label: "Ham" },
+                  { value: "mushrooms", label: "Mushrooms" },
+                ]}
+                isRequired
+              />
+              <AppRadioGroupControl
+                name="gender"
+                label="Gender"
+                options={[
+                  { value: "MALE", label: "Male" },
+                  { value: "FEMALE", label: "Female" },
+                  { value: "OTHER", label: "Other" },
+                ]}
+                isRequired
+              />
+            </Stack>
+
             <Button type="submit" colorScheme="green">
               SAVE
             </Button>
