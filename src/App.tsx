@@ -7,7 +7,7 @@ const onSubmit = (v: any) => {
   console.log(v);
 };
 
-const AppForm = () => {
+const SimpleForm = () => {
   return (
     <Form
       initialValues={{}}
@@ -52,7 +52,7 @@ const AppForm = () => {
 export const App = () => {
   return (
     <Container py="4">
-      <AppForm />
+      <SimpleForm />
     </Container>
   );
 };

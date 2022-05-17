@@ -48,8 +48,11 @@ export type AppTextInputControlProps = { name: string; label: string } & InputPr
 export const AppTextInputControl: FC<AppTextInputControlProps> = ({ name, label, ...rest }) => {
   const { input, meta } = useField(name);
   return (
-    <AppFormControl name={name} isRequired={rest.isRequired}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <AppFormControl name={name}>
+      <FormLabel htmlFor={name}>
+        {label}
+        {rest.isRequired && <RedAsterisk />}
+      </FormLabel>
       <Input {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
       <AppFormError name={name} />
     </AppFormControl>
@@ -57,13 +60,16 @@ export const AppTextInputControl: FC<AppTextInputControlProps> = ({ name, label,
 };
 
 // Textarea Input
-export type AppTextAreaControlProps = { name: string; label: string } & TextareaAutosizeProps;
+export type AppTextAreaControlProps = { name: string; label: string; isRequired?: true } & TextareaAutosizeProps;
 
-export const AppTextAreaControl: FC<AppTextAreaControlProps> = ({ name, label, ...rest }) => {
+export const AppTextAreaControl: FC<AppTextAreaControlProps> = ({ name, label, isRequired, ...rest }) => {
   const { input, meta } = useField(name);
   return (
-    <AppFormControl name={name} isRequired={rest.required}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <AppFormControl name={name}>
+      <FormLabel htmlFor={name}>
+        {label}
+        {isRequired && <RedAsterisk />}
+      </FormLabel>
       <Textarea as={TextareaAutosize} {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
       <AppFormError name={name} />
     </AppFormControl>
@@ -76,8 +82,11 @@ export type AppSelectControlProps = { name: string; label: string } & SelectProp
 export const AppSelectControl: FC<AppSelectControlProps> = ({ name, label, ...rest }) => {
   const { input, meta } = useField(name);
   return (
-    <AppFormControl name={name} isRequired={rest.isRequired}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <AppFormControl name={name}>
+      <FormLabel htmlFor={name}>
+        {label}
+        {rest.isRequired && <RedAsterisk />}
+      </FormLabel>
       <Select {...rest} {...input} id={name} isInvalid={meta.touched && meta.error} />
       <AppFormError name={name} />
     </AppFormControl>
@@ -93,8 +102,11 @@ export const AppCheckboxControl: FC<AppCheckboxControlProps> = ({ name, label, .
     meta,
   } = useField(name, { type: "checkbox" });
   return (
-    <AppFormControl name={name} isRequired={rest.isRequired}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+    <AppFormControl name={name}>
+      <FormLabel htmlFor={name}>
+        {label}
+        {rest.isRequired && <RedAsterisk />}
+      </FormLabel>
       <Checkbox {...rest} {...input} isChecked={checked} id={name} isInvalid={meta.touched && meta.error} />
       <AppFormError name={name} />
     </AppFormControl>
