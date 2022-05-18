@@ -13,7 +13,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
-import { Props as SelectProps, Select } from "chakra-react-select";
+import { MultiValue, Props as SelectProps, Select, SingleValue } from "chakra-react-select";
 import { FC } from "react";
 import { useField } from "react-final-form";
 import TextareaAutosize, { TextareaAutosizeProps } from "react-textarea-autosize";
@@ -85,7 +85,9 @@ export const AppTextareaControl: FC<AppTextareaControlProps> = ({ name, label, i
 };
 
 // Select Input
-export type SelectValueType = { name: string; label: string };
+type Option = { value: string; label: string };
+export type SingleSelectValue = SingleValue<Option>;
+export type MultiSelectValue = MultiValue<Option>;
 
 export type AppSelectControlProps = { name: string; label: string } & SelectProps;
 

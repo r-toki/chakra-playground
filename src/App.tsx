@@ -8,14 +8,14 @@ import {
   AppRadioGroupControl,
   AppSelectControl,
   AppTextareaControl,
-  SelectValueType,
+  SingleSelectValue,
 } from "./components/app-form-components";
 
 type ExampleFormValues = {
   nickname: string;
   age: number;
   gender: "MALE" | "FEMALE" | "OTHER";
-  prefecture: SelectValueType;
+  prefecture: SingleSelectValue;
   otherComments: string;
 };
 
